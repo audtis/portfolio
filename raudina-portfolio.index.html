@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Raudina Idzni W – Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --orange: #E84A12;
+      --black: #111111;
+      --white: #FFFFFF;
+      --gray: #F5F5F5;
+      --text-muted: #888888;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 64px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .nav-logo {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--orange); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      align-items: center;
+      padding: 120px 120px 80px 120px;
+      gap: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(232,74,18,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-label::before {
+      content: '';
+      width: 30px; height: 1px;
+      background: var(--orange);
+    }
+
+    .hero h1 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(48px, 5vw, 72px);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      color: var(--black);
+    }
+
+    .hero h1 em {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--orange);
+    }
+
+    .hero h1 strong {
+      font-weight: 700;
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: #444;
+      max-width: 520px;
+      margin: 28px 0 40px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 48px;
+    }
+
+    .hero-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--black);
+      padding: 8px 16px;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .hero-tag:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    .hero-tag .dot {
+      width: 6px; height: 6px;
+      background: var(--orange);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--orange);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 16px 32px;
+      transition: all 0.3s;
+    }
+
+    .hero-cta:hover {
+      background: var(--black);
+      gap: 20px;
+    }
+
+    .hero-cta svg { transition: transform 0.3s; }
+    .hero-cta:hover svg { transform: translateX(4px); }
+
+    /* HERO IMAGE */
+    .hero-image {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .hero-image-bg {
+      width: 360px;
+      height: 420px;
+      background: var(--orange);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      filter: grayscale(100%);
+      mix-blend-mode: multiply;
+    }
+
+    .hero-image-accent {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      width: 80px; height: 80px;
+      border: 3px solid var(--orange);
+      z-index: -1;
+    }
+
+    .hero-image-accent2 {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 50px; height: 50px;
+      background: var(--black);
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-image-accent2 span {
+      color: var(--white);
+      font-size: 20px;
+    }
+
+    /* ABOUT STRIP */
+    .about-strip {
+      background: var(--black);
+      color: var(--white);
+      padding: 48px 120px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-strip p {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--orange);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-top: 4px;
+    }
+
+    /* SECTION */
+    section { padding: 100px 120px; }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 3vw, 48px);
+      font-weight: 700;
+      font-style: italic;
+      color: var(--orange);
+    }
+
+    .section-title-plain {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(32px, 3vw, 48px);
+      font-weight: 300;
+      color: var(--black);
+    }
+
+    /* PROJECT GRID */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--gray);
+    }
+
+    .project-card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #E0E0E0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-card-img img {
+      transform: scale(1.04);
+    }
+
+    .project-card-tag {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: var(--white);
+      color: var(--black);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+    }
+
+    .project-card-body {
+      padding: 24px 28px;
+    }
+
+    .project-card-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--black);
+      margin-bottom: 6px;
+    }
+
+    .project-card-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    /* Placeholder project images */
+    .proj-jakone { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+    .proj-dashboard { background: linear-gradient(135deg, #2d4a22 0%, #1a5276 100%); }
+    .proj-gooddream { background: linear-gradient(135deg, #4a235a 0%, #6c3483 100%); }
+    .proj-curhat { background: linear-gradient(135deg, #922b21 0%, #e74c3c 100%); }
+
+    .proj-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .proj-placeholder span {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 32px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* DECK SECTION */
+    .deck-section {
+      background: var(--black);
+      padding: 100px 120px;
+    }
+
+    .deck-section .section-title { color: var(--orange); }
+    .deck-section .section-title-plain { color: var(--white); }
+
+    .deck-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .deck-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 32px;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .deck-card:hover {
+      background: rgba(232,74,18,0.1);
+      border-color: var(--orange);
+      transform: translateY(-4px);
+    }
+
+    .deck-card-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.06);
+      display: block;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .deck-card-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .deck-card-type {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--white);
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding: 60px 120px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .footer-cta h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-style: italic;
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+
+    .footer-cta p {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .footer-link {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover { color: var(--orange); }
+
+    .footer-link.primary {
+      background: var(--orange);
+      color: var(--white);
+      padding: 12px 24px;
+    }
+
+    .footer-link.primary:hover {
+      background: var(--black);
+    }
+
+    .footer-bottom {
+      padding: 20px 120px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-bottom p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* BACK TO TOP */
+    .back-top {
+      position: fixed;
+      bottom: 40px; right: 40px;
+      width: 48px; height: 48px;
+      background: var(--orange);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: all 0.3s;
+      z-index: 99;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .back-top.visible { opacity: 1; }
+    .back-top:hover { background: var(--black); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-content > * {
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-label { animation-delay: 0.1s; }
+    .hero h1 { animation-delay: 0.2s; }
+    .hero-desc { animation-delay: 0.3s; }
+    .hero-tags { animation-delay: 0.4s; }
+    .hero-cta { animation-delay: 0.5s; }
+
+    .hero-image {
+      animation: fadeUp 1s ease 0.3s both;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 120px 60px 80px;
+        text-align: center;
+      }
+      .hero-image { display: none; }
+      .hero-tags { justify-content: center; }
+      .hero-label { justify-content: center; }
+      nav { padding: 20px 40px; }
+      section { padding: 80px 60px; }
+      .about-strip { padding: 48px 60px; grid-template-columns: 1fr; }
+      .deck-section { padding: 80px 60px; }
+      footer { padding: 60px 60px; grid-template-columns: 1fr; }
+      .footer-bottom { padding: 20px 60px; }
+    }
+
+    @media (max-width: 768px) {
+      .project-grid { grid-template-columns: 1fr; }
+      .deck-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: repeat(3, 1fr); }
+      .nav-links { display: none; }
+      section { padding: 60px 32px; }
+      .about-strip { padding: 48px 32px; }
+      .deck-section { padding: 60px 32px; }
+      footer { padding: 48px 32px; }
+      .footer-bottom { padding: 20px 32px; flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Project</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-label">Available for work</div>
+      <h1>Hi,<br>I am <em>Raudina</em> <strong>Idzni W.</strong></h1>
+      <p class="hero-desc">
+        A UIX Designer based in Jakarta, Indonesia with a strong focus on Qualitative Research. With 4+ years of experience in digital banking and a background in anthropology, I translate user insights into intuitive experiences aligned with business goals.
+      </p>
+      <div class="hero-tags">
+        <span class="hero-tag"><span class="dot"></span>UX Designer</span>
+        <span class="hero-tag"><span class="dot"></span>UX Researcher</span>
+        <span class="hero-tag"><span class="dot"></span>Deck Presentation Designer</span>
+        <span class="hero-tag"><span class="dot"></span>Graphic Designer</span>
+        <span class="hero-tag"><span class="dot"></span>Infographic</span>
+      </div>
+      <a href="#projects" class="hero-cta">
+        View Projects
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="hero-image">
+      <div class="hero-image-bg">
+        <!-- Replace with actual photo -->
+        <div style="width:100%;height:100%;background:linear-gradient(to bottom, #c94010, #e84a12);display:flex;align-items:center;justify-content:center;">
+          <span style="color:rgba(255,255,255,0.2);font-family:'Playfair Display',serif;font-size:80px;font-style:italic;">R</span>
+        </div>
+      </div>
+      <div class="hero-image-accent"></div>
+      <div class="hero-image-accent2">
+        <span>✦</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT STRIP -->
+  <div class="about-strip">
+    <p>
+      With 4+ years of experience in digital banking products and a background in anthropology, I bring a research-driven approach to translating user insights into intuitive experiences that are aligned with business goals.
+    </p>
+    <div class="about-stats">
+      <div class="stat-item">
+        <span class="stat-num">4+</span>
+        <span class="stat-label">Years Exp.</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">74%</span>
+        <span class="stat-label">User Growth</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">10+</span>
+        <span class="stat-label">Projects</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header">
+      <span class="section-title">UI/UX</span>
+      <span class="section-title-plain">Project</span>
+    </div>
+    <div class="project-grid">
+      <div class="project-card">
+        <div class="project-card-img">
+          <div class="proj-placeholder proj-jakone">
+            <span>JakOne</span>
+          </div>
+          <span class="project-card-tag">UX Design</span>
+        </div>
+        <div class="project-card-body">
+          <div class="project-card-title">JakOne Pay (E-Wallet)</div>
+          <div class="project-card-meta">Bank DKI · 2021</div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-card-img">
+          <div class="proj-placeholder proj-dashboard">
+            <span>Dashboard</span>
+          </div>
+          <span class="project-card-tag">UX Design</span>
+        </div>
+        <div class="project-card-body">
+          <div class="project-card-title">Dashboard Report & Monitoring</div>
+          <div class="project-card-meta">Bank Aceh · 2023</div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-card-img">
+          <div class="proj-placeholder proj-gooddream">
+            <span>GoodDream</span>
+          </div>
+          <span class="project-card-tag">UX Research</span>
+        </div>
+        <div class="project-card-body">
+          <div class="project-card-title">Read & Pay in GoodDreamer</div>
+          <div class="project-card-meta">GoodDreamers · 2023</div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-card-img">
+          <div class="proj-placeholder proj-curhat">
+            <span>Curhat.in</span>
+          </div>
+          <span class="project-card-tag">UX Design</span>
+        </div>
+        <div class="project-card-body">
+          <div class="project-card-title">Curhat.in Study Case</div>
+          <div class="project-card-meta">Binar Academy · 2022</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DECK & INFOGRAPHIC -->
+  <div class="deck-section">
+    <div class="section-header">
+      <span class="section-title">Design Deck & Infographic</span>
+      <span class="section-title-plain" style="color:rgba(255,255,255,0.5)">Project</span>
+    </div>
+    <div class="deck-grid">
+      <div class="deck-card">
+        <span class="deck-card-num">01</span>
+        <div class="deck-card-title">Warm Corporate Presentation</div>
+        <div class="deck-card-type">Deck Design</div>
+      </div>
+      <div class="deck-card">
+        <span class="deck-card-num">02</span>
+        <div class="deck-card-title">Product Feature Infographic</div>
+        <div class="deck-card-type">Infographic</div>
+      </div>
+      <div class="deck-card">
+        <span class="deck-card-num">03</span>
+        <div class="deck-card-title">Data Report Visualization</div>
+        <div class="deck-card-type">Infographic</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-cta">
+      <h3>Let's Connect!</h3>
+      <p>Thank you for visiting my latest portfolio — let's discuss and brainstorm on your future design project ✦</p>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:raudina96@gmail.com" class="footer-link">Email</a>
+      <a href="https://www.linkedin.com/in/raudina-idzni-widyowati" class="footer-link" target="_blank">LinkedIn</a>
+      <a href="#projects" class="footer-link primary">View Work</a>
+    </div>
+  </footer>
+
+  <div class="footer-bottom">
+    <p>© Raudina Widyowati 2026</p>
+    <p style="color:#E84A12;">raudina96@gmail.com</p>
+  </div>
+
+  <!-- BACK TO TOP -->
+  <a href="#home" class="back-top" id="backTop">↑</a>
+
+  <script>
+    // Back to top visibility
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+      backTop.classList.toggle('visible', window.scrollY > 400);
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.project-card, .deck-card, .stat-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
